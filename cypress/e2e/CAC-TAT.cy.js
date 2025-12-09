@@ -75,7 +75,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.get('.error').should('be.visible')
   })
 
-  it.only('envia o formuário com sucesso usando um comando customizado', () => {
+  it('envia o formuário com sucesso usando um comando customizado', () => {
     const data = {
       firstName: 'João',
       lastName: 'Silva', 
@@ -85,5 +85,27 @@ describe('Central de Atendimento ao Cliente TAT', () => {
 
     cy.fillMandatoryFieldsAndSubmit()
     cy.get('.success').should('be.visible')
+  })
+
+  // Novo teste: seleciona YouTube por texto e verifica o value
+  it('seleciona um produto (YouTube) por seu texto', () => {
+    cy.get('#product')
+    .select('YouTube')
+    .should('have.value', 'youtube')
+  })
+
+  // Novo teste: seleciona Mentoria por seu value e verifica o value
+  it('seleciona um produto (Mentoria) por seu valor', () => {
+    cy.get('#product')
+      .select('mentoria')
+      .should('have.value', 'mentoria')
+  })
+
+  // Novo teste: seleciona Blog por índice e verifica o value
+  it('seleciona um produto (Blog) por seu índice', () => {
+    // índice 1 porque o primeiro option é o placeholder (index 0)
+    cy.get('#product')
+      .select(1)
+      .should('have.value', 'blog')
   })
 })
